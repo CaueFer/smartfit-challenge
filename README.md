@@ -2,6 +2,9 @@
 
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 18.0.1.
 
+Ver projeto
+ 👉 https://smartfit-challenge-one.vercel.app/reabertura
+
 # Preview
 
 ![preview](preview.png)

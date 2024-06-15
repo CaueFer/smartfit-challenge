@@ -1,0 +1,255 @@
+<main class="container mx-auto max-w-5xl px-10">
+  <section id="sectionHero" class="relative py-14">
+    <h1 class="font-black text-4xl">
+      REABERTURA <br />
+      SMART FIT
+    </h1>
+    <hr class="border-4 border-black mt-4" style="width: 10%" />
+    <p class="mt-6">
+      O horário de funcionamento das nossas unidades está seguindo os decretos
+      de cada município. Por isso, confira aqui se a sua unidade está aberta e
+      as medidas de segurança que estamos seguindo.
+    </p>
+  </section>
+  <section id="sectionHours" class="border-2 border-slate-500/25 rounded-lg">
+    <div class="card-content p-6">
+      <div class="flex gap-3 items-center justify-start">
+        <img src="assets/imgs/icon-hour.png" alt="icon hour" width="30px" />
+        <span class="text-base">Horário</span>
+      </div>
+      <h1 class="text-2xl mt-5 font-light text-slate-500 pl-3 sm:pl-0">
+        Qual período quer treinar?
+      </h1>
+      <hr class="bg-slate mt-3" />
+      <form [formGroup]="filterForms" (ngSubmit)="onSubmit()">
+        <div class="flex flex-col text-base font-light text-slate-500">
+          <div class="flex gap-3 py-3 mt-2 border-b border-slate">
+            <input
+              type="checkbox"
+              style="width: 18px"
+              formControlName="manha"
+            />
+            <div class="flex justify-between items-between w-full">
+              <span>Manhâ</span>
+              <span>06:00 às 12:00</span>
+            </div>
+          </div>
+          <div class="flex gap-3 py-3 border-b border-slate">
+            <input
+              type="checkbox"
+              style="width: 18px"
+              formControlName="tarde"
+            />
+            <div class="flex justify-between items-between w-full">
+              <span>Tarde</span>
+              <span>12:01 às 18:00</span>
+            </div>
+          </div>
+          <div class="flex gap-3 py-3 border-b border-slate">
+            <input
+              type="checkbox"
+              style="width: 18px"
+              formControlName="noite"
+            />
+            <div class="flex justify-between items-between w-full">
+              <span>Noite</span>
+              <span>18:01 às 23:00</span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="card-footer flex flex-col gap-4 sm:flex-row justify-center sm:justify-between mt-14"
+        >
+          <div class="flex gap-3 justify-center md:justify-start">
+            <input
+              type="checkbox"
+              style="width: 18px"
+              id="showClosed"
+              [checked]="showClosed"
+              (change)="toggleClosed()"
+            />
+            <label for="showClosed">Exibir unidades fechadas</label>
+          </div>
+          <div class="flex gap-3 justify-center sm:justify-end">
+            <span>Resultados encontrados: </span>
+            <span class="font-black">{{ resultUnits.length }}</span>
+          </div>
+        </div>
+
+        <div
+          class="w-full mx-auto gap-5 font-black flex flex-col sm:flex-row justify-center mt-8"
+        >
+          <button class="p-3 bg-yellowCustom w-full sm:w-2/5" type="submit">
+            ENCONTRAR UNIDADE
+          </button>
+          <button
+            type="button"
+            (click)="resetForm()"
+            class="p-3 border border-slate-400 w-full sm:w-2/5"
+          >
+            LIMPAR
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="py-12 relative" style="height: auto">
+    <div
+      class="bg-slate-500/10 rounded-lg w-full h-full grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-12 p-6"
+    >
+      <div class="col-span-3">
+        <p class="font-black text-center">Máscara</p>
+        <div class="flex justify-center p-4 gap-3 relative">
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img src="assets/imgs/required-mask.png" width="65px" alt="" />
+            <span>Obrigatório</span>
+          </div>
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img src="assets/imgs/recommended-mask.png" width="65px" alt="" />
+            <span>Recomendado</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-3">
+        <p class="font-black text-center">Toalha</p>
+        <div class="flex justify-center p-4 gap-3 relative">
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img src="assets/imgs/required-towel.png" width="65px" alt="" />
+            <span>Obrigatório</span>
+          </div>
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img src="assets/imgs/recommended-towel.png" width="65px" alt="" />
+            <span>Recomendado</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-3">
+        <p class="font-black text-center">Bebedouro</p>
+        <div class="flex justify-center p-4 gap-3 relative">
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img src="assets/imgs/partial-fountain.png" width="65px" alt="" />
+            <span>Parcial</span>
+          </div>
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img
+              src="assets/imgs/not_allowed-fountain.png"
+              width="65px"
+              alt=""
+            />
+            <span>Proibido</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-3">
+        <p class="font-black text-center">Vestiário</p>
+        <div class="flex justify-center p-4 gap-3 relative">
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img src="assets/imgs/allowed-lockerroom.png" width="65px" alt="" />
+            <span>Liberado</span>
+          </div>
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img src="assets/imgs/partial-lockerroom.png" width="65px" alt="" />
+            <span style="width: 70px !important" class="text-center"
+              >Parcial</span
+            >
+          </div>
+          <div class="flex flex-col justify-center items-center gap-1">
+            <img src="assets/imgs/closed-lockerroom.png" width="65px" alt="" />
+            <span>Fechado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-14">
+    <div
+      *ngIf="isLoading"
+      class="w-full flex items-center justify-center"
+      style="height: 250px"
+    >
+      <svg
+        class="animate-spin h-10 w-10 text-black"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+    </div>
+
+    <div
+      *ngIf="!isLoading && resultUnits.length > 0"
+      class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 flex flex-row gap-4"
+    >
+      <div
+        *ngFor="let unit of resultUnits | slice : 0 : visibleUnits"
+        class="card drop-shadow-xl bg-slate-500/10 rounded-lg grid-span-1 p-4 h-auto"
+        style="min-height: 455px"
+      >
+        @if (unit.opened) {
+        <span class="text-base text-green-600 font-bold">Aberto</span>
+        } @else {
+        <span class="text-base text-red-500 font-bold">Fechado</span>}
+
+        <h1 class="text-2xl font-bold my-2" [innerHTML]="unit.title"></h1>
+        @if (unit.content) {
+        <p
+          class="text-md"
+          [innerHTML]="unit.content"
+          style="min-height: 72px"
+        ></p>
+        } @else if(unit.street) {
+        <p class="text-md" style="min-height: 72px">
+          {{ unit.street }} - {{ unit.region }}, {{ unit.city_name }},
+          {{ unit.uf }}
+        </p>
+        }
+        <hr *ngIf="unit.schedules" class="border-1 border-black/25 my-4" />
+        <div *ngIf="unit.schedules" class="grid grid-cols-4 relative">
+          <img src="assets/imgs/{{ unit.mask }}-mask.png" class="grid-span-1" />
+          <img
+            src="assets/imgs/{{ unit.towel }}-towel.png"
+            class="grid-span-1"
+          />
+          <img
+            src="assets/imgs/{{ unit.fountain }}-fountain.png"
+            class="grid-span-1"
+          />
+          <img
+            src="assets/imgs/{{ unit.locker_room }}-lockerroom.png"
+            class="grid-span-1"
+          />
+        </div>
+        <div class="flex flex-row mt-6 gap-6 flex-wrap">
+          <div *ngFor="let sched of unit.schedules">
+            <h2 class="text-2xl font-bold">{{ sched.weekdays }}</h2>
+            <p class="text-md mt-1">{{ sched.hour }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center w-full">
+      <button
+        *ngIf="!isLoading && resultUnits.length > 0"
+        class="p-3 bg-yellowCustom w-full sm:w-2/5 mt-5 font-bold"
+        type="button"
+        (click)="showMore()"
+      >
+        VER MAIS
+      </button>
+    </div>
+  </section>
+</main>

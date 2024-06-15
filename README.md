@@ -2,6 +2,10 @@
 
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 18.0.1.
 
+# Preview
+
+![preview](preview.png)
+
 ## Desafio
 
 Link: [SmarFit-Challenge](https://github.com/bioritmo/front-end-code-challenge-smartsite)
